@@ -16,7 +16,10 @@ router
     // .post((req, res) => {
     //     console.log(req.body.data)
     // })
-    //.delete(todoController.deleteTodo)
+
+router
+    .route('/delete/:_id')
+    .delete(todoController.deleteTodo)
 
 
 module.exports = router;
