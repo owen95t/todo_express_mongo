@@ -3,9 +3,10 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const bodyParser = require('body-parser')
 //const router = express.Router()
-const todoController = require('./controllers/TodoController');
+//const todoController = require('./controllers/TodoController');
 const connectDB = require('./config/db')
 const cors = require('cors')
+
 
 //const todoRoutes = require('./routers/todoRoutes');
 //settings
