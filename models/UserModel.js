@@ -6,11 +6,19 @@ const UserSchema = new Schema({
     username: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        min: 6
+    },
+    name: {
+      type: String,
     },
     passwordHashed: {
         type: String,
         required: true
+    },
+    dateCreated: {
+        type: Date,
+        default: Date.now()
     }
 }, {
     collection: 'users',

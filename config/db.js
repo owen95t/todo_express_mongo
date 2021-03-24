@@ -9,11 +9,13 @@ const dbURI = uri.uri
 //     console.log(err)
 // })
 
+
 const connectDB = async () => {
     try {
         await mongoose.connect(dbURI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
+            useCreateIndex: true,
             useFindAndModify: false
         }).then((con) => {
             console.log("MongoDB connected: " + con.connection.host)

@@ -24,13 +24,14 @@ passport.use('login',
 }, async (username, password, cb) => {
     try {
         const user = await UserModel.findOne({username: username})
-        const passwordMatch = await bcrypt.compare(password, user.passwordHashed);
-
         if (!user) {
             return cb(null, false, {message: 'user doesnt exist'})
-        }else if (!passwordMatch) {
+        }
+        const passwordMatch = await bcrypt.compare(password, user.passwordHashed);
+        if (!passwordMatch) {
             return cb(null, false, {message: 'Wrong password'})
         }
+
         return cb(null, user, {message: 'Logged in successfully'})
     } catch (e){
         cb(e);

@@ -1,14 +1,17 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../auth/verifyToken')
 
 // @desc
 
-router.get('/', (req, res, next) => {
-     res.send('We are at root/index')
+router.get('/', auth, (req, res, next) => {
+    console.log('Root Requested')
+    res.send('We are at root/index. User: ' + req.user._id)
     //console.log('get root')
 });
 
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', auth, (req, res) => {
+    console.log('Dashboard Requested')
     res.send('dashboard')
 })
 

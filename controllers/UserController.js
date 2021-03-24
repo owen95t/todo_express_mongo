@@ -1,8 +1,10 @@
 const User = require('../models/UserModel');
 const bcrypt = require('bcryptjs')
 
-exports.createUser = (req,res) => {
-    const hashedPass = bcrypt.hash(req.body.password, 10);
+const {registerValidation, loginValidation} = require('../config/inputValidation')
+
+exports.createUser = async (req,res) => {
+    const hashedPass = await bcrypt.hash(req.body.password, 10);
     //This is a shortcut way
     // User.create({
     //     username: req.body.username,
@@ -12,12 +14,12 @@ exports.createUser = (req,res) => {
 
     const newUser = new User({
         username: req.body.username,
-        password: hashedPass
+        passwordHashed: hashedPass
     });
-    newUser.save((err, user) => {
+    const savedUser = await newUser.save((err, user) => {
         if (err) {
             console.log('newUser save error: ' + err)
-            return res.status(500).send(err)
+            return res.status(400).send(err)
         }
         res.status(201).send({auth: true, token: token})
     })
